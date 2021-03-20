@@ -21,9 +21,6 @@ class LRUCache(BaseCaching):
             self.cache_data[key] = item
             if key not in self.keys:
                 self.keys.append(key)
-            else:
-                self.keys.remove(key)
-                self.keys.append(key)
             if(len(self.cache_data) > BaseCaching.MAX_ITEMS):
                 first_key = self.keys.pop(0)
                 del self.cache_data[first_key]
