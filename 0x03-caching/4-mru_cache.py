@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""MRUCache"""
+"""MRU Caching
+"""
 
 from base_caching import BaseCaching
 
