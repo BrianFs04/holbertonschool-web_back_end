@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 
+"""
 hash_password
 is_valid
 """
