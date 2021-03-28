@@ -23,10 +23,12 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """Constructor method"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """Filters values in incoming log records using filter_datum"""
         return filter_datum(
             self.fields, self.REDACTION,
             super(RedactingFormatter, self).format(record), self.SEPARATOR)
@@ -35,11 +37,10 @@ class RedactingFormatter(logging.Formatter):
 def filter_datum(fields: List[str], redaction: str, message: str,
                  separator: str) -> str:
     """Returns the log message obfuscated"""
-    obfus_mss = message
     for field in fields:
-        obfus_mss = re.sub(
-            f"(?<={field}=).*?(?={separator})", redaction, obfus_mss)
-    return obfus_mss
+        message = re.sub(
+            f"(?<={field}=).*?(?={separator})", redaction, message)
+    return message
 
 
 def get_logger() -> logging.Logger:
