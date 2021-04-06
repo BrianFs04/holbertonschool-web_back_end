@@ -34,7 +34,7 @@ class SessionExpAuth(SessionAuth):
 
     def user_id_for_session_id(self, session_id=None):
         """User ID for Session ID"""
-        if session_id is None:
+        if session_id is None or not isinstance(session_id, str):
             return None
 
         session_dictionary = self.user_id_by_session_id.get(session_id)
