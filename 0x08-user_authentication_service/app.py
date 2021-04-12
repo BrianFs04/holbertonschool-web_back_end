@@ -72,7 +72,7 @@ def profile():
     user = AUTH.get_user_from_session_id(session_id)
     if not session_id or not user:
         abort(403)
-    return jsonify({"email", user.email}), 200
+    return jsonify({"email": user.email}), 200
 
 
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
