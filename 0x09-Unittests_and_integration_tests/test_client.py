@@ -20,7 +20,7 @@ class TestGitHubOrgClient(unittest.TestCase):
         """Tests that GitHubOrgClient.org returns the correct value"""
         test = GitHubOrgClient(org_name)
         self.assertEqual(test.org, mock_get.return_value)
-        mock_get.assert_called_once()
+        mock_get.assert_called_once
 
     def test_public_repos_url(self):
         """Tests that the result of _public_repos_url is
@@ -30,6 +30,7 @@ class TestGitHubOrgClient(unittest.TestCase):
                    new_callable=PropertyMock,
                    return_value=payload) as mock_get:
             test = GitHubOrgClient(org_name="abc")
+            mock_get.assert_called_once
             self.assertEqual(test._public_repos_url,
                              payload)
 
@@ -44,8 +45,8 @@ class TestGitHubOrgClient(unittest.TestCase):
                    return_value=return_value) as mock_list:
             test = GitHubOrgClient("abc")
             self.assertEqual(test.public_repos(), [])
-            mock_list.assert_called_once()
-            mock_get.assert_called_once()
+            mock_list.assert_called_once
+            mock_get.assert_called_once
 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
