@@ -13,13 +13,13 @@ from utils import (
 )
 
 
-class GitHubOrgClient:
+class GithubOrgClient:
     """A Githib org client
     """
     ORG_URL = "https://api.github.com/orgs/{org}"
 
     def __init__(self, org_name: str) -> None:
-        """Init method of GitHubOrgClient"""
+        """Init method of GithubOrgClient"""
         self._org_name = org_name
 
     @memoize
@@ -57,8 +57,3 @@ class GitHubOrgClient:
         except KeyError:
             return False
         return has_license
-
-
-if __name__ == "__main__":
-    test = GitHubOrgClient("Google")
-    print(test.has_license({"license": {"key": "my_license"}}, "my_license"))
