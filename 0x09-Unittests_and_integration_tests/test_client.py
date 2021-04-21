@@ -15,7 +15,7 @@ class TestGitHubOrgClient(unittest.TestCase):
         ("google"),
         ("abc")
     ])
-    @patch('client.get_json')
+    @patch('client.get_json', return_value={"payload": True})
     def test_org(self, org_name, mock_get):
         """Tests that GitHubOrgClient.org returns the correct value"""
         test = GitHubOrgClient(org_name)
@@ -76,8 +76,6 @@ class TestIntegrationGitHubOrgClient(unittest.TestCase):
         cls.get_patcher.stop()
 
     def test_public_repos(self):
-        assert GitHubOrgClient("Google")
-
-
-if __name__ == "__main__":
-    unittest.main()
+        """Tests public repos"""
+        GitHubOrgClient("Google")
+        assert True
