@@ -81,7 +81,7 @@ class TestIntegrationGitHubOrgClient(unittest.TestCase):
         GithubOrgClient("Google")
         assert True
 
-    def test_has_license(self):
+    def test_public_repos_with_license(self):
         """Tests that a repo has license"""
         GithubOrgClient("Google")
         assert True
