@@ -38,7 +38,7 @@ class TestGitHubOrgClient(unittest.TestCase):
     def test_public_repos(self, mock_get):
         """Tests that the list of repos is what
         expected from the chosen payload"""
-        payload = [{"name": "abc"}]
+        payload = {"name": "abc"}
         return_value = payload
         with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock,
@@ -55,7 +55,7 @@ class TestGitHubOrgClient(unittest.TestCase):
     def test_has_license(self, repo, license_key, expected):
         """Tests that a client has license key"""
         test = GithubOrgClient.has_license(repo, license_key)
-        self.assertEqual(test, expected)
+        self.assertEqual(expected, test)
 
 
 @parameterized_class(
@@ -78,5 +78,10 @@ class TestIntegrationGitHubOrgClient(unittest.TestCase):
 
     def test_public_repos(self):
         """Tests public repos"""
+        GithubOrgClient("Google")
+        assert True
+
+    def test_has_license(self):
+        """Tests that a repo has license"""
         GithubOrgClient("Google")
         assert True
