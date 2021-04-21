@@ -4,7 +4,7 @@ test_client module
 """
 from unittest.mock import patch, PropertyMock
 from parameterized import parameterized, parameterized_class
-from client import GitHubOrgClient
+from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 import unittest
 
@@ -18,7 +18,7 @@ class TestGitHubOrgClient(unittest.TestCase):
     @patch('client.get_json', return_value={"payload": True})
     def test_org(self, org_name, mock_get):
         """Tests that GitHubOrgClient.org returns the correct value"""
-        test = GitHubOrgClient(org_name)
+        test = GithubOrgClient(org_name)
         self.assertEqual(test.org, mock_get.return_value)
         mock_get.assert_called_once
 
@@ -26,10 +26,10 @@ class TestGitHubOrgClient(unittest.TestCase):
         """Tests that the result of _public_repos_url is
         the expected one based on the mocked payload"""
         payload = {"repos_url": True}
-        with patch("client.GitHubOrgClient._public_repos_url",
+        with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock,
                    return_value=payload) as mock_get:
-            test = GitHubOrgClient(org_name="abc")
+            test = GithubOrgClient(org_name="abc")
             mock_get.assert_called_once
             self.assertEqual(test._public_repos_url,
                              payload)
@@ -40,10 +40,10 @@ class TestGitHubOrgClient(unittest.TestCase):
         expected from the chosen payload"""
         payload = [{"name": "abc"}]
         return_value = payload
-        with patch("client.GitHubOrgClient._public_repos_url",
+        with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock,
                    return_value=return_value) as mock_list:
-            test = GitHubOrgClient("abc")
+            test = GithubOrgClient("abc")
             self.assertEqual(test.public_repos(), [])
             mock_list.assert_called_once
             mock_get.assert_called_once
@@ -54,7 +54,7 @@ class TestGitHubOrgClient(unittest.TestCase):
     ])
     def test_has_license(self, repo, license_key, expected):
         """Tests that a client has license key"""
-        test = GitHubOrgClient.has_license(repo, license_key)
+        test = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(test, expected)
 
 
@@ -78,5 +78,5 @@ class TestIntegrationGitHubOrgClient(unittest.TestCase):
 
     def test_public_repos(self):
         """Tests public repos"""
-        GitHubOrgClient("Google")
+        GithubOrgClient("Google")
         assert True
