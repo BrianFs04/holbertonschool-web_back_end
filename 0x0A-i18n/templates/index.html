@@ -9,8 +9,7 @@
         <p>{{ _("logged_in_as", username=g.user.name) }}</p>
         {% else %}
         <p>{{ _("not_logged_in")}}</p>
-        {% endif %} {% if g.current_time %}
-        <p>{{ _("current_time_is", current_time=g.current_time) }}</p>
         {% endif %}
+        <p>{{ _("current_time_is", current_time=g.time) }}</p>
     </body>
 </html>

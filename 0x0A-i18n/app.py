@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Infer appropriate time zone
+Display the current time
 """
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _
+from flask_babel import Babel, _, to_user_timezone
+from babel.dates import format_datetime
+from datetime import datetime
 import pytz
+
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -37,6 +40,8 @@ def root_path():
 def get_locale():
     """Get locale language from request"""
     locale = request.args.get("locale")
+    if not locale:
+        locale = "en"
     if locale in app.config["LANGUAGES"]:
         return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
@@ -55,6 +60,9 @@ def get_user():
 def before_request():
     """Uses get_user to find a user if any"""
     g.user = get_user()
+    time = to_user_timezone(datetime.now())
+    g.time = format_datetime(time,
+                             locale=str(get_locale()))
 
 
 @babel.timezoneselector
@@ -63,13 +71,10 @@ def get_timezone():
     try:
         if request.args.get("timezone"):
             timezone = request.args.get("timezone")
-            pytz.timezone(timezone)
         elif g.user and g.user.get("timezone"):
             timezone = g.user.get("timezone")
-            pytz.timezone(timezone)
         else:
             timezone = app.config["BABEL_DEFAULT_TIMEZONE"]
-            pytz.timezone(timezone)
     except pytz.exceptions.UnknownTimeZoneError:
         timezone = "UTC"
 
