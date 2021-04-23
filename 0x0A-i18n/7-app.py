@@ -30,7 +30,7 @@ app.config.from_object(Config)
 @app.route("/")
 def root_path():
     """Root route"""
-    return render_template("6-index.html")
+    return render_template("7-index.html")
 
 
 @babel.localeselector
