@@ -51,7 +51,7 @@ def replay(method: Callable):
     print(f"{qua_name} was called {number_calls} times:")
 
     for i, o in zip(inputs, outputs):
-        print(f"{qua_name}(*('{i.decode('utf-8')}',)) -> {o.decode('utf-8')}")
+        print(f"{qua_name}(*{i.decode('utf-8')}) -> {o.decode('utf-8')}")
 
 
 class Cache():
