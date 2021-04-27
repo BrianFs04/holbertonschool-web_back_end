@@ -8,7 +8,7 @@ from typing import Union, Optional, Callable
 from uuid import uuid4
 
 
-def count_class(method: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """Count how many times methods of the Cache class are called"""
     key = method.__qualname__
 
@@ -47,8 +47,8 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @count_class
     @call_history
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Generates a random key, store the input data
         in Redis using the random key and return the key"""
