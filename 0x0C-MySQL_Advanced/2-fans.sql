@@ -1,7 +1,8 @@
 -- Best band ever!
--- SQL script that ranks country origins of bands, ordered by the number of (non-unique) fans
+-- SQL script that ranks country origins of bands, 
+-- ordered by the number of (non-unique) fans
 SELECT origin,
     SUM(fans) AS nb_fans
-FROM real_app_2.metal_bands
+FROM metal_bands
 GROUP BY origin
 ORDER BY nb_fans DESC;
