@@ -2,10 +2,9 @@
 """ log_stats module """
 from pymongo import MongoClient
 
-client = MongoClient()
-collection = client.logs.nginx
-
 if __name__ == "__main__":
+    client = MongoClient()
+    collection = client.logs.nginx
     logs = collection.count_documents({})
     print(f"{logs} logs")
 
