@@ -6,7 +6,7 @@ client = MongoClient()
 collection = client.logs.nginx
 
 if __name__ == "__main__":
-    logs = collection.estimated_document_count()
+    logs = collection.count_documents({})
     print(f"{logs} logs")
 
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
