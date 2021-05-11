@@ -6,11 +6,10 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
   const res = [];
   return Promise.allSettled(promises)
     .then((results) => {
-      results.map((result) => (
+      results.map(({ status, value, reason }) => (
         res.push({
-          status: result.status,
-          value: result.status === 'rejected' ? result.reason.toString() : result.value,
+          status,
+          value: status === 'rejected' ? reason.toString() : value,
         })));
-      return res;
     });
 }
