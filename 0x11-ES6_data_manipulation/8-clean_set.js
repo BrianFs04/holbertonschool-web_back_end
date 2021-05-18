@@ -1,6 +1,6 @@
 const cleanSet = (set, startString) => {
   let res = '';
-  if (startString) {
+  if (startString || startString.length) {
     set.forEach((i) => {
       if (i.startsWith(startString)) res += `${i.slice(startString.length)}-`;
     });
