@@ -1,5 +1,5 @@
 import getListStudents from './0-get_list_students';
 
-const getStudentsByLocation = () => getListStudents().filter((student) => student.location === 'San Francisco');
+const getStudentsByLocation = (studentsList, city) => studentsList.filter((student) => student.location === city);
 
 export default getStudentsByLocation;
