@@ -12,11 +12,11 @@ const countStudents = (path) => {
       if (!fields[row[3]]) {
         fields[row[3]] = [];
       }
-      if (row[0]) fields[row[3]].push(row[0]);
+      fields[row[3]].push(row[0]);
     }
     console.log(`Number of students: ${count}`);
     for (const [key, values] of Object.entries(fields)) {
-      if (key && values.length) {
+      if (key !== 'undefined') {
         console.log(`Number of students in ${key}: ${values.length}. List: ${values.join(', ')}`);
       }
     }
