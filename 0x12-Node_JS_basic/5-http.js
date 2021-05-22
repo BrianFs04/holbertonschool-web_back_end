@@ -8,7 +8,7 @@ const app = http.createServer(async (req, res) => {
   } else if (req.url === '/students') {
     try {
       const data = await countStudents(process.argv[2]);
-      res.end(`This is the list of students\n${data}`);
+      res.end(`This is the list of our students\n${data}`);
     } catch (err) {
       res.end(err.message);
     }
