@@ -6,7 +6,7 @@ const countStudents = (path) => new Promise((resolve, reject) => {
       reject(Error('Cannot load the database'));
       return;
     }
-    const columns = data.toString().split('\r\n').slice(1, data.length);
+    const columns = data.split('\n').slice(1, data.length);
     let count = 0;
     const fields = {};
     const msg = [];
