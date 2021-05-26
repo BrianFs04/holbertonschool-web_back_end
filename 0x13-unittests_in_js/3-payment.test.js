@@ -17,7 +17,7 @@ describe('sendPaymentRequestToApi', () => {
 		functionSpy.restore();
 	});
 
-	it('asdsad', () => {
+	it('Validate Utils func and result message', () => {
 		sendPaymentRequestToApi(100, 20);
 		expect(functionSpy.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
 		expect(consoleSpy.calledWith('The total is: 120')).to.be.true;
